@@ -7,7 +7,6 @@ import ContentContainer from './ContentContainer';
 class  StoreListVegi extends Component {
     constructor(props){
         super(props)
-        fruits =  new ContentContainer().state.vegi;
     }
     state ={items: [], loaded:false}
 
@@ -31,7 +30,7 @@ class  StoreListVegi extends Component {
    
     
     render(){
-        console.log('this is the state from contentcontainer vegi : ' + fruits )
+      
     return(
         <ScrollView>
             {this._renderAlbums()}
