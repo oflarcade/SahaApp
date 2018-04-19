@@ -23,7 +23,7 @@ export default class BasketScreen extends Component {
   render() {
     return (
         <View>
-            <Header />
+            <Header headerText={'Cart'}/>
             <View style={styles.container}>
             {this._renderScreen()}
             </View>

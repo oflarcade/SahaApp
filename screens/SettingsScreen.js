@@ -1,82 +1,128 @@
 import React, {Component} from 'react';
-import { StyleSheet, View,StatusBar,Platform} from 'react-native';
-import { Card, Button, Avatar, Text } from 'react-native-elements';
+import { StyleSheet, View,StatusBar,Platform , ScrollView} from 'react-native';
+import { Card, Button, Avatar, Text, List, ListItem } from 'react-native-elements';
+import Header  from '../components/Header';
+import InfoText from '../components/InfoText';
 import firebase from 'firebase';
 
 export default class SettingsScreen extends Component {
 
     constructor(props){
         super(props)
-        this.state = {username:'', address:'',editCard:false}
+        this.state = {username:'', address:'',editCard:false, dailyGoal:'10000' }
     }
   static navigationOptions = {
     header: null,
   };
-    
-  componentWillMount(){
-        this.setState({ username:firebase.auth().currentUser.email});
-  }
- 
   
   render() {
-    /* Go ahead and delete ExpoConfigView and replace it with your
-     * content, we just wanted to give you a quick view of your config */
     return (
         <View>
-            <Card title='Profile' wrapperStyle={{ justifyContent: 'center',}}>
-                <Avatar 
-                large
-                rounded
-                icon={{name: 'account-circle',}}
-                overlayContainerStyle={{backgroundColor: 'green'}}
-                style={{alignSelf: 'center',justifyContent: 'center',}}
-                />
-                <Text style={{ marginBottom: 10,alignSelf:'center'}}>
-                    {this.state.username}
-                </Text>
-                <Button
-                    icon={{ name: 'code' }}
-                    backgroundColor='#03A9F4'
-                    buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
-                    title='Edit Profile' />
-            </Card>
-
-            
+             <Header headerText={'Profile'}/>
+        <ScrollView style={styles.scroll}>
+        <View style={styles.userRow}>
+          <View style={styles.userImage}>
+            <Avatar
+              large
+              rounded
+              icon={{name:'account-circle'}}
+              
+            />
+          </View>
+          <View>
+            <Text style={{ fontSize: 16 }}>username</Text>
+            <Text
+              style={{
+                color: 'gray',
+                fontSize: 16,
+              }}
+            >
+              This is Email
+            </Text>
+          </View>
         </View>
-    );
+        <InfoText text="Account" />
+        <List containerStyle={styles.listContainer}>
+          <ListItem
+            switchButton
+            hideChevron
+            title="Push Notifications"
+            containerStyle={styles.listItemContainer}
+        
+          />
+          <ListItem
+            title="Daily Goal"
+            rightTitle={this.state.dailyGoal}
+            
+            containerStyle={styles.listItemContainer}
+            
+          />
+          <ListItem
+            title="Address"
+            rightTitle="New York"
+            containerStyle={styles.listItemContainer}
+            
+          />
+        </List>
+        <InfoText text="More" />
+        <List containerStyle={styles.listContainer}>
+          <ListItem
+            title="About US"
+            
+            containerStyle={styles.listItemContainer}
+            
+          />
+          <ListItem
+            title="Terms and Policies"
+            
+            containerStyle={styles.listItemContainer}
+            
+          />
+          <ListItem
+            title="Share our App"
+            
+            containerStyle={styles.listItemContainer}
+            
+          />
+          <ListItem
+            title="Rate Us"
+            
+            containerStyle={styles.listItemContainer}
+            
+          />
+          <ListItem
+            title="Send FeedBack"
+            
+            containerStyle={styles.listItemContainer}
+            
+          />
+        </List>
+      </ScrollView>
+      </View>
+    )
   }
 }
 const styles = StyleSheet.create({
-  container:{
-      flex:1,
-      backgroundColor:'#FFF',
-  },
-  image:{
-      width:75,
-      height: 75,
-      borderRadius: 37.5,
-  },
-  text:{
-      padding: 15,
-  },
-  androidHeader: {
-    ...Platform.select({
-        android: {
-            backgroundColor: 'white'
-        }
-    })
-},
-androidHeaderTitle: {
-    ...Platform.select({
-        android: {
-            alignItems: 'flex-end',
-            paddingRight: 40,
-        }
-    })
-
-},
-headerContent:{
-  flexDirection: 'row',
-  
-}
-})
+    scroll: {
+      backgroundColor: 'white',
+    },
+    userRow: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      paddingBottom: 6,
+      paddingLeft: 15,
+      paddingRight: 15,
+      paddingTop: 6,
+    },
+    userImage: {
+      marginRight: 12,
+    },
+    listContainer: {
+      marginBottom: 0,
+      marginTop: 0,
+      borderTopWidth: 0,
+    },
+    listItemContainer: {
+      borderBottomColor: '#ECECEC',
+    },
+  })
