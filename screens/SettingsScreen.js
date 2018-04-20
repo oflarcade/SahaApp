@@ -14,7 +14,16 @@ export default class SettingsScreen extends Component {
   static navigationOptions = {
     header: null,
   };
-  
+
+  _signOutFirebase= async ()=>{
+      try {
+        await firebase.auth().signOut();
+        this.props.navigation.navigate('Login')
+      } catch (e) {
+        console.log(e)
+      }
+
+  }
   render() {
     return (
         <View>
@@ -30,15 +39,17 @@ export default class SettingsScreen extends Component {
             />
           </View>
           <View>
-            <Text style={{ fontSize: 16 }}>username</Text>
+            <Text style={{ fontSize: 16 }}>Display Name</Text>
             <Text
               style={{
                 color: 'gray',
                 fontSize: 16,
-              }}
-            >
-              This is Email
+              }}>
+              User Email
             </Text>
+          </View>
+          <View>
+            <Button small rounded iconRight={{name: 'code'}} title='Sign Out' onPress={()=>this._signOutFirebase()}/>
           </View>
         </View>
         <InfoText text="Account" />
@@ -53,7 +64,7 @@ export default class SettingsScreen extends Component {
           <ListItem
             title="Daily Goal"
             rightTitle={this.state.dailyGoal}
-            
+            onPress={() => this._onPress()}
             containerStyle={styles.listItemContainer}
             
           />

@@ -72,7 +72,8 @@ export default class PedometerScreen extends Component {
       
         <View style={styles.container}>  
           <Text style={styles.points}> Walk Or Run !</Text>
-          <Text style={styles.points}> {this.state.pastStepCount}</Text>
+          <Text style={styles.points}> Yesterday Stpes : {this.state.pastStepCount}</Text>
+          <Text style={styles.points}> Today Steps: {this.state.currentStepCount} </Text>
          {/*  <Text>
             Pedometer.isAvailableAsync(): {this.state.isPedometerAvailable}
           </Text>
